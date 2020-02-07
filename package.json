@@ -1,0 +1,19 @@
+{
+  "name": "evaluator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "server": "yarn --cwd server dev",
+    "client": "yarn --cwd client start",
+    "dev": "concurrently run \"yarn server\" \"yarn client\"",
+    "cypress": "yarn --cwd client cypress open",
+    "test": "yarn --cwd server test"
+  },
+  "devDependencies": {
+    "bson-objectid": "^1.3.0",
+    "concurrently": "^5.0.2",
+    "faker": "^4.1.0",
+    "rosie": "^2.0.1"
+  }
+}
