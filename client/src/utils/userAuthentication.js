@@ -1,4 +1,4 @@
-const saveJWT = (token) => {
+const setJWT = (token) => {
   window.localStorage.setItem('jwt', token);
 }
 
@@ -6,12 +6,12 @@ const removeJWT = () => {
   window.localStorage.removeItem('jwt');
 }
 
-const userAuthenticated = () => {
+const isUserAuthenticated = () => {
   return window.localStorage.getItem('jwt') !== null;
 }
 
 module.exports = {
-  saveJWT,
+  setJWT,
   removeJWT,
-  userAuthenticated
+  isUserAuthenticated
 }

@@ -26,7 +26,7 @@ describe('Sign In', () => {
       page.fillCredentials(user.email, 'invalid')
 
       cy.location('pathname').should('eq', '/sign_in')
-      cy.contains('Invalid email or password').should('be.visible')
+      cy.contains('Invalid Email or Password').should('be.visible')
     })
   })
 })
