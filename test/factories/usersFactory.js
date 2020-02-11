@@ -6,8 +6,8 @@ const factory = new Factory()
   .attr('_id', () => ObjectId.generate())
   .attr('id', ['_id'], (_id) => _id.id)
   .attrs({
-    name: faker.name.firstName,
-    age: faker.random.number,
+    first_name: faker.name.firstName,
+    last_name: faker.name.lastName,
     email: faker.internet.email,
     password: faker.internet.password
   })

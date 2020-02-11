@@ -19,9 +19,9 @@ class SignInPage extends Page {
     const user = this.users.find((u) => u.email == email && u.password == password)
 
     if (user) {
-      cy.route({ url: `/api/v1/users/sign_in`, method: 'POST', status: 200, response: { ...user, token: 'token' } })
+      cy.route({ url: `/api/users/sign_in`, method: 'POST', status: 200, response: { ...user, token: 'token' } })
     } else {
-      cy.route({ url: `/api/v1/users/sign_in`, method: 'POST', status: 404, response: {} })
+      cy.route({ url: `/api/users/sign_in`, method: 'POST', status: 405, response: {} })
     }
 
     cy.get('#submit').click()
