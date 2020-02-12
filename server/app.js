@@ -1,41 +1,47 @@
-const express = require('express')
-const mongoose = require('./config/db')
+const express = require("express");
+const mongoose = require("./config/db");
+const path = require("path");
 
 const app = express();
 
-const usersRouter = require('./routers/users')
+const usersRouter = require("./routers/users");
+const formsRouter = require("./routers/forms");
 
-if (process.env.NODE_ENV !== 'test') {
-  mongoose.connect()
+if (process.env.NODE_ENV !== "test") {
+  mongoose.connect();
 }
 
-app.use(express.json())
-app.use(usersRouter)
+app.use(express.json());
+app.use(usersRouter);
+app.use(formsRouter);
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
-  app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+  app.get("/*", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
   });
 }
 
 // Handle errors
 app.use((err, req, res, next) => {
   if (!err) {
-      return next();
+    return next();
   }
 
-  if (err.name === 'ValidationError' || err.name === 'InvalidRequestException') {
-    return res.status(400).send(err)
+  if (
+    err.name === "ValidationError" ||
+    err.name === "InvalidRequestException"
+  ) {
+    return res.status(400).send(err);
   }
 
-  if (err.name === 'AuthenticationException') {
-    return res.status(404).send()
+  if (err.name === "AuthenticationException") {
+    return res.status(404).send();
   }
 
-  console.log(err)
+  console.log(err);
   res.status(500);
-  res.send({ error: 'Internal server error' });
+  res.send({ error: "Internal server error" });
 });
 
 module.exports = app;

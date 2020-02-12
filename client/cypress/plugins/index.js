@@ -15,7 +15,35 @@
 /**
  * @type {Cypress.PluginConfig}
  */
-module.exports = (on, config) => {
+
+const { Seeder } = require("mongo-seeding");
+
+const config = {
+  database: {
+    host: "127.0.0.1",
+    port: 27017,
+    name: "evaluator-test"
+  },
+  dropDatabase: false
+};
+
+const seeder = new Seeder(config);
+
+module.exports = (on, _config) => {
+  on("task", {
+    seed: async ({ collection, documents }) => {
+      const documentsArray = [documents].flat();
+
+      try {
+        await seeder.import([{ name: collection, documents: documentsArray }]);
+      } catch (error) {
+        console.log(error);
+      }
+
+      return null;
+    }
+  });
+
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
-}
+};

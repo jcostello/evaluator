@@ -1,6 +1,6 @@
-const { MongoMemoryServer } = require('mongodb-memory-server');
+const { MongoMemoryServer } = require("mongodb-memory-server");
 
-const db = require('../config/db');
+const db = require("../config/db");
 
 const server = new MongoMemoryServer();
 
@@ -14,18 +14,18 @@ const disconnectMemoryDB = () => {
 };
 
 const cleanMemoryDB = async () => {
-  await db.dropAllCollection()
+  await db.dropAllCollection();
 };
 
 beforeAll(async () => {
-  await connectMemoryDB()
-  await cleanMemoryDB()
-})
+  await connectMemoryDB();
+  await cleanMemoryDB();
+});
 
 afterAll(() => {
-  disconnectMemoryDB()
-})
+  disconnectMemoryDB();
+});
 
 beforeEach(async () => {
-  await cleanMemoryDB()
-})
+  await cleanMemoryDB();
+});

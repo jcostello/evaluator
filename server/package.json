@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "env-cmd -f ./config/dev.env nodemon server.js",
+    "start": "env-cmd -f ./config/dev.env nodemon server.js",
+    "start:test": "env-cmd -f ./config/test.env nodemon server.js",
     "test": "env-cmd -f ./config/test.env jest ./test --watch --runInBand"
   },
   "dependencies": {
