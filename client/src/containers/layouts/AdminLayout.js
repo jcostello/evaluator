@@ -9,6 +9,8 @@ import NavBar from "./../../components/NavBar";
 import PrivateRoute from "./../../components/PrivateRoute";
 import Home from "./../Home";
 import Forms from "./../Forms";
+import Users from "./../Users";
+import Teams from "./../Teams";
 
 const { Content } = Layout;
 
@@ -30,6 +32,12 @@ const AdminLayout = ({ history }) => {
           </PrivateRoute>
           <PrivateRoute path="/forms">
             <Forms />
+          </PrivateRoute>
+          <PrivateRoute path="/users">
+            <Users />
+          </PrivateRoute>
+          <PrivateRoute path="/teams">
+            <Teams />
           </PrivateRoute>
         </Content>
       </Layout>

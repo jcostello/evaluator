@@ -1,22 +1,30 @@
 import React from "react";
 
-import { Table, Icon, Popconfirm } from "antd";
+import { Table, Icon, Popconfirm, Avatar } from "antd";
 
 const { Column } = Table;
 
-const FormTable = ({ forms, onEditClick, onDeleteConfirm }) => {
+const UserTable = ({ users, onEditClick, onDeleteConfirm }) => {
   return (
-    <Table dataSource={forms} rowKey="id" id="form-list">
+    <Table dataSource={users} rowKey="id" id="user-list">
       <Column
-        title="Name"
-        key="name"
-        dataIndex="name"
+        key="avatarUrl"
+        dataIndex="avatarUrl"
+        width="50px"
+        render={avatarUrl => <Avatar src={avatarUrl} />}
+      />
+
+      <Column
+        title="Full Name"
+        key="fullName"
+        dataIndex="fullName"
         render={(text, record) => (
           <a href="#" onClick={() => onEditClick(record.id)}>
             {text}
           </a>
         )}
       />
+      <Column title="Email" key="email" dataIndex="email" />
 
       <Column
         title="Action"
@@ -25,7 +33,7 @@ const FormTable = ({ forms, onEditClick, onDeleteConfirm }) => {
         render={(_text, record) => (
           <span>
             <Popconfirm
-              title="Are you sure you want to delete this form?"
+              title="Are you sure you want to delete this user?"
               onConfirm={() => onDeleteConfirm(record)}
               okText="Yes"
             >
@@ -40,4 +48,4 @@ const FormTable = ({ forms, onEditClick, onDeleteConfirm }) => {
   );
 };
 
-export default FormTable;
+export default UserTable;

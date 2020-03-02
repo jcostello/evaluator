@@ -3,8 +3,7 @@ const faker = require("faker");
 const ObjectId = require("bson-objectid");
 
 const factory = new Factory()
-  .attr("id", () => ObjectId.generate())
-  .attr("_id", ["id"], id => id.id)
+  .attr("_id", () => new ObjectId())
   .attrs({
     name: faker.name.firstName,
     questions: [

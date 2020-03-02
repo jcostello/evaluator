@@ -6,6 +6,7 @@ const app = express();
 
 const usersRouter = require("./routers/users");
 const formsRouter = require("./routers/forms");
+const teamsRouter = require("./routers/teams");
 
 if (process.env.NODE_ENV !== "test") {
   mongoose.connect();
@@ -14,6 +15,7 @@ if (process.env.NODE_ENV !== "test") {
 app.use(express.json());
 app.use(usersRouter);
 app.use(formsRouter);
+app.use(teamsRouter);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));

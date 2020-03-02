@@ -5,9 +5,7 @@ const ObjectId = require("bson-objectid");
 const factory = new Factory()
   .attr("_id", () => new ObjectId())
   .attrs({
-    fullName: `${faker.name.firstName} ${faker.name.lastName}`
-    email: faker.internet.email,
-    token: faker.internet.password
+    name: faker.name.firstName
   });
 
 module.exports = factory;

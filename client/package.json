@@ -10,7 +10,6 @@
     "axios": "^0.19.2",
     "formik": "^2.1.4",
     "formik-antd": "^1.8.0",
-    "mongo-seeding": "^3.4.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-google-login": "^5.1.0",
@@ -41,7 +40,8 @@
   },
   "devDependencies": {
     "bson-objectid": "^1.3.0",
-    "cypress": "^4.0.0"
+    "cypress": "^4.0.0",
+    "mongo-seeding": "^3.4.0"
   },
   "proxy": "http://localhost:4000"
 }

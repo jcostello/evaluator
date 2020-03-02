@@ -4,9 +4,9 @@ import { Table, Icon, Popconfirm } from "antd";
 
 const { Column } = Table;
 
-const FormTable = ({ forms, onEditClick, onDeleteConfirm }) => {
+const TeamTable = ({ teams, onEditClick, onDeleteConfirm }) => {
   return (
-    <Table dataSource={forms} rowKey="id" id="form-list">
+    <Table dataSource={teams} rowKey="id" id="team-list">
       <Column
         title="Name"
         key="name"
@@ -19,13 +19,20 @@ const FormTable = ({ forms, onEditClick, onDeleteConfirm }) => {
       />
 
       <Column
+        title="Members"
+        key="members"
+        dataIndex="members"
+        render={members => <span>{members.length}</span>}
+      />
+
+      <Column
         title="Action"
         key="action"
         width="100px"
         render={(_text, record) => (
           <span>
             <Popconfirm
-              title="Are you sure you want to delete this form?"
+              title="Are you sure you want to delete this team?"
               onConfirm={() => onDeleteConfirm(record)}
               okText="Yes"
             >
@@ -40,4 +47,4 @@ const FormTable = ({ forms, onEditClick, onDeleteConfirm }) => {
   );
 };
 
-export default FormTable;
+export default TeamTable;

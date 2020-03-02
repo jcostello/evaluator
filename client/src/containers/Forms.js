@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "../utils/axios";
 
 import { Button, Row, message, Modal } from "antd";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import FormDrawer from "./../components/forms/FormDrawer";
 import FormTable from "./../components/forms/FormTable";
@@ -14,8 +14,6 @@ const Forms = () => {
   const [forms, setForms] = useState([]);
   const [formDrawerOpen, setFormDrawerOpen] = useState(false);
 
-  const match = useRouteMatch("/forms/new");
-
   useEffect(() => {
     const loadForms = async () => {
       const { data: forms } = await axios.get("/api/forms");
@@ -25,12 +23,6 @@ const Forms = () => {
 
     loadForms();
   }, []);
-
-  useEffect(() => {
-    if (match) {
-      openFormDrawer();
-    }
-  });
 
   const openFormDrawer = useCallback(() => setFormDrawerOpen(true));
   const closeFormDrawer = useCallback(dirty => {
@@ -67,7 +59,7 @@ const Forms = () => {
     );
 
     const formsState = forms.map(form => {
-      return form.id == updatedForm.id ? updatedForm : form;
+      return form.id === updatedForm.id ? updatedForm : form;
     });
 
     message.success("Form updated successfully");
@@ -94,7 +86,12 @@ const Forms = () => {
   return (
     <>
       <Link to="/forms/new">
-        <Button id="new-form" style={{ marginBottom: "20px" }} type="primary">
+        <Button
+          id="new-form"
+          style={{ marginBottom: "20px" }}
+          type="primary"
+          onClick={openFormDrawer}
+        >
           Add New Form
         </Button>
       </Link>

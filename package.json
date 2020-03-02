@@ -7,8 +7,8 @@
     "start": "node server/server.js",
     "server": "yarn --cwd server start",
     "client": "yarn --cwd client start",
-    "dev": "concurrently run \"yarn server\" \"yarn client\"",
-    "cypress": "concurrently run \"yarn --cwd server start:test\" \"yarn --cwd client start:test\" \"yarn --cwd client cypress open\"",
+    "dev": "concurrently \"yarn server\" \"yarn client\"",
+    "cypress": "concurrently \"yarn --cwd server start:test\" \"yarn --cwd client start:test\" \"yarn --cwd client cypress open\"",
     "test": "yarn --cwd server test",
     "heroku-postbuild": "cd server && yarn && cd ../client && yarn && yarn run build"
   },

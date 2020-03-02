@@ -6,7 +6,7 @@ import * as Yup from "yup";
 
 import QuestionFields from "./QuestionFields";
 
-const NewForm = ({ form, visible, onClose, onSubmit }) => {
+const FormDrawer = ({ form, visible, onClose, onSubmit }) => {
   const initialQuestion = {
     question: "",
     questionType: "",
@@ -46,7 +46,7 @@ const NewForm = ({ form, visible, onClose, onSubmit }) => {
       >
         {({ values, dirty, resetForm }) => (
           <Drawer
-            title="Create a new Form"
+            title={form ? "Edit form" : "Create new Form"}
             width="720"
             visible={visible}
             onClose={() => onClose(dirty)}
@@ -97,4 +97,4 @@ const NewForm = ({ form, visible, onClose, onSubmit }) => {
   );
 };
 
-export default NewForm;
+export default FormDrawer;

@@ -20,8 +20,8 @@ import "./commands";
 // require('./commands')
 //
 
-beforeEach(() => {
+beforeEach(async () => {
   localStorage.removeItem("jwt");
 
-  cy.exec('mongo evaluator-test --eval "db.dropDatabase()"');
+  await cy.exec('mongo evaluator-test --eval "db.dropDatabase()"');
 });

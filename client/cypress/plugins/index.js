@@ -16,6 +16,8 @@
  * @type {Cypress.PluginConfig}
  */
 
+const ObjectId = require("bson-objectid");
+
 const { Seeder } = require("mongo-seeding");
 
 const config = {
@@ -29,10 +31,24 @@ const config = {
 
 const seeder = new Seeder(config);
 
+const iterate = obj => {
+  Object.keys(obj).forEach(key => {
+    if (ObjectId.isValid(obj[key])) {
+      obj[key] = new ObjectId(obj[key]);
+    }
+
+    if (typeof obj[key] === "object") {
+      iterate(obj[key]);
+    }
+  });
+};
+
 module.exports = (on, _config) => {
   on("task", {
     seed: async ({ collection, documents }) => {
       const documentsArray = [documents].flat();
+
+      iterate(documentsArray)
 
       try {
         await seeder.import([{ name: collection, documents: documentsArray }]);
@@ -43,7 +59,4 @@ module.exports = (on, _config) => {
       return null;
     }
   });
-
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
 };

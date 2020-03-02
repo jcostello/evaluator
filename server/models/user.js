@@ -1,17 +1,23 @@
-const mongoose = require('mongoose')
-const validator = require('validator')
-const jwt = require('jsonwebtoken')
+const mongoose = require("mongoose");
+const validator = require("validator");
+const jwt = require("jsonwebtoken");
 
 const userSchema = mongoose.Schema({
-  firstName: {
+  fullName: {
     type: String,
     required: true,
-    trim: true,
+    capitalize: true,
+    trim: true
   },
-  lastName: {
+
+  avatarUrl: {
     type: String,
-    required: true,
-    trim: true,
+    trim: true
+  },
+
+  deleted: {
+    type: Boolean,
+    default: false
   },
 
   email: {
@@ -22,31 +28,30 @@ const userSchema = mongoose.Schema({
     lowercase: true,
     validate(email) {
       if (!validator.isEmail(email)) {
-        throw new Error('Email is invalid')
+        throw new Error("Email is invalid");
       }
     }
   },
 
   token: {
-    type: String,
+    type: String
   }
-})
+});
 
 userSchema.methods.generateJWT = async function() {
-  const user = this
-  const token = jwt.sign({id: user.id.toString()}, process.env.SECRET)
+  const user = this;
+  const token = jwt.sign({ id: user.id.toString() }, process.env.SECRET);
 
-  user.token = token
-  await user.save()
+  user.token = token;
+  await user.save();
 
-  return token
-}
+  return token;
+};
 
-
-userSchema.set('toJSON', {
+userSchema.set("toJSON", {
   virtuals: true
 });
 
-const User = mongoose.model('User', userSchema)
+const User = mongoose.model("User", userSchema);
 
-module.exports = User
+module.exports = User;

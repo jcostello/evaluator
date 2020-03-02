@@ -11,10 +11,20 @@ const questionSchema = mongoose.Schema({
     required: true,
     trim: true
   },
-  answers: [{
-    type: String,
-    trim: true
-  }]
+  comments: {
+    type: Boolean,
+    default: false
+  },
+  optional: {
+    type: Boolean,
+    default: false
+  },
+  answers: [
+    {
+      type: String,
+      trim: true
+    }
+  ]
 });
 
 const formSchema = mongoose.Schema({
